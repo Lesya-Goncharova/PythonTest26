@@ -1,5 +1,6 @@
 from pages.homepage import HomePage
 from pages.product import ProductPage
+import time
 
 
 def test_open(driver):
@@ -15,9 +16,13 @@ def test_open(driver):
     # assert title.text == 'Samsung galaxy s6'
 
 def test_monitors(driver):
-    driver.get("https://www.demoblaze.com/")
-    monitors = driver.find_element("xpath", "(//a[@id='itemc'])[3]")
-    monitors.click()
-    bloks = driver.find_elements("xpath", "//div[@class='card-block']")
-    count = len(bloks)
-    assert count == 2
+    homepage = HomePage(driver)
+    homepage.open_site()
+    homepage.click_monitors()
+    time.sleep(2)
+    homepage.check_products_count(2)
+    # driver.get("https://www.demoblaze.com/")
+    # monitors = driver.find_element("xpath", "(//a[@id='itemc'])[3]")
+    # monitors.click()
+    # bloks = driver.find_elements("xpath", "//div[@class='card-block']")
+    # assert len(bloks) == 2
